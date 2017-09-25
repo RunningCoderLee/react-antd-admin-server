@@ -9,11 +9,11 @@ const fs = require('fs')
 const cors = require('cors')
 // const config = require('config')
 
-const apiFile = fs.readFileSync(path.join(__dirname, '/src/api/config/swagger.yaml'), 'utf8')
+const apiFile = fs.readFileSync(path.join(__dirname, '/src/api/swagger.yaml'), 'utf8')
 const apiJson = jsyaml.safeLoad(apiFile)
 const routerOpt = {
   swaggerUi: path.join(__dirname, '/swagger.json'),
-  controllers: path.join(__dirname, './/src/api/controllers'),
+  controllers: path.join(__dirname, './src/controllers'),
   useStubs: process.env.NODE_ENV === 'development', // Conditionally turn on stubs (mock mode)
 }
 
