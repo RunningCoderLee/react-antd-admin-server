@@ -9,7 +9,7 @@
     "generate-swagger-code": "swagger-codegen generate -l nodejs-server -c src/api/config/configuration.json -i src/api/config/swagger.yaml -o src/api",
     "delete-useless-file": "mv src/api/api/* src/api && rm -rf src/api/README.md src/api/index.js src/api/.swagger-codegen-ignore src/api/package.json src/api/.swagger-codegen src/api/api",
     "build-swagger": "yarn pre-build-swagger && yarn generate-swagger-code && yarn delete-useless-file",
-    "start": "export NODE_ENV=development && node ./bin/start.js",
+    "start": "export DEBUG=*,-express:* NODE_ENV=development && node ./bin/start.js",
     "test": "./node_modules/mocha/bin/mocha --recursive"
   },
   "browser": {
@@ -21,6 +21,7 @@
     "cookie-parser": "1.4.3",
     "cors": "^2.8.4",
     "debug": "2.6.3",
+    "dotenv": "^4.0.0",
     "express": "4.15.2",
     "morgan": "1.8.1",
     "superagent": "3.5.2",
@@ -32,6 +33,7 @@
     "eslint-plugin-import": "2.7.0",
     "expect.js": "0.3.1",
     "mocha": "2.3.4",
-    "sinon": "1.17.3"
+    "sinon": "1.17.3",
+    "supports-color": "^4.4.0"
   }
 }

@@ -44,20 +44,98 @@ paths:
             application/json:
               name: "mock-admin"
               token: "mock-token"
+          headers:
+            api-key:
+              type: "string"
+              description: "authenticated token"
         400:
           description: "bad request"
         500:
           description: "internal server error"
       x-swagger-router-controller: "Authentication"
+  /billionaires:
+    get:
+      tags:
+      - "billionaires"
+      summary: "list of the world's billionaires"
+      description: "get top ten billionaires in the world"
+      operationId: "billionairesGET"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/inline_response_200_1"
+          examples:
+            application/json:
+            - name: "Bill Gates"
+              ranking:
+                number: 1
+                trend: "steady"
+              netWorth:
+                value: "$86.0 billion"
+                trend: "increase"
+              age: 61
+              nationality: "USA"
+              sourceOfWealth: "Microsoft"
+            - name: "Warren Buffett"
+              ranking:
+                number: 2
+                trend: "increase"
+              netWorth:
+                value: "$75.6 billion"
+                trend: "increase"
+              age: 86
+              nationality: "USA"
+              sourceOfWealth: "Berkshire Hathaway"
+        400:
+          description: "badrequset"
+        500:
+          description: "internal server error"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "Billionaires"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api-key"
+    in: "header"
 definitions:
   userInfo:
     type: "object"
     required:
+    - "password"
     - "username"
     properties:
       username:
         type: "string"
       password:
+        type: "string"
+  billionaires_ranking:
+    properties:
+      number:
+        type: "integer"
+      trend:
+        type: "string"
+        enum:
+        - "increase"
+        - "decrease"
+        - "steady"
+  inline_response_200_1:
+    properties:
+      name:
+        type: "string"
+      ranking:
+        $ref: "#/definitions/billionaires_ranking"
+      netWorth:
+        $ref: "#/definitions/billionaires_netWorth"
+      age:
+        type: "integer"
+      nationality:
+        type: "string"
+      sourceOfWealth:
         type: "string"
   inline_response_200:
     properties:
@@ -65,3 +143,13 @@ definitions:
         type: "string"
       token:
         type: "string"
+  billionaires_netWorth:
+    properties:
+      value:
+        type: "string"
+      trend:
+        type: "string"
+        enum:
+        - "increase"
+        - "decrease"
+        - "steady"

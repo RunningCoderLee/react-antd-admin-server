@@ -75,6 +75,7 @@ function onListening() {
  */
 
 server.listen(port, () => {
+  debug('sadfsdfsdafsdfsdfsdfsd')
   console.log('Your server is listening on port %d (http://localhost:%d)', port, port)
   console.log('Swagger-ui is available on http://localhost:%d/docs', port)
 })

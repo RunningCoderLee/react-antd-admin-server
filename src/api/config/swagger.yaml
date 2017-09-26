@@ -17,6 +17,14 @@ tags:
 schemes:
 - http
 - https
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api-key
+    in: header
+    
+ 
   
 paths:
   /authentication:
@@ -40,6 +48,7 @@ paths:
         schema: 
           required: 
           - username
+          - password
           type: object
           properties:
             username:
@@ -47,8 +56,12 @@ paths:
             password:
               type: string
       responses:
-        '200':
+        200:
           description: authenticated user info 
+          headers:
+            api-key:
+              type: string
+              description: authenticated token
           schema: 
             type: object
             properties:
@@ -60,7 +73,80 @@ paths:
             application/json:
               name: 'mock-admin'
               token: 'mock-token'
-        '400':
+        400:
           description: bad request
-        '500':
+        500:
           description: internal server error
+  /billionaires:
+    get:
+      tags: 
+      - billionaires
+      summary: list of the world's billionaires
+      description: get top ten billionaires in the world
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                ranking:
+                  type: object
+                  properties:
+                    number:
+                      type: integer
+                    trend:
+                      type: string
+                      enum: 
+                      - increase
+                      - decrease
+                      - steady
+                netWorth:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                    trend:
+                      type: string
+                      enum: 
+                      - increase
+                      - decrease
+                      - steady
+                age: 
+                  type: integer
+                nationality:
+                  type: string
+                sourceOfWealth:
+                  type: string
+          examples: 
+            application/json:
+            - name: Bill Gates
+              ranking: 
+                number: 1
+                trend: steady
+              netWorth:
+                value: $86.0 billion
+                trend: increase
+              age: 61
+              nationality: USA
+              sourceOfWealth: Microsoft
+            - name: Warren Buffett
+              ranking: 
+                number: 2
+                trend: increase
+              netWorth:
+                value: $75.6 billion
+                trend: increase
+              age: 86
+              nationality: USA
+              sourceOfWealth: Berkshire Hathaway
+        400:
+          description: badrequset
+        500:
+          description: internal server error
+      security: 
+      - api_key: []
+    

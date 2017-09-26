@@ -7,6 +7,7 @@ const swaggerTools = require('swagger-tools')
 const jsyaml = require('js-yaml')
 const fs = require('fs')
 const cors = require('cors')
+require('dotenv').config()
 // const config = require('config')
 
 const apiFile = fs.readFileSync(path.join(__dirname, '/src/api/swagger.yaml'), 'utf8')
@@ -24,6 +25,24 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 
 
+function handleApiKey(req, authOrSecDef, scopesOrApiKey, callback) {
+  let err = null
+  const val = scopesOrApiKey
+
+  if (scopesOrApiKey === '123123') {
+    return callback()
+  }
+
+  if (scopesOrApiKey === '') {
+    err = new Error('Unauthorized')
+  } else {
+    err = new Error('Forbidden')
+  }
+
+  return callback(err, val)
+}
+
+
 function createApp() {
   app.use(logger('dev'))
   app.use(bodyParser.json())
@@ -34,10 +53,11 @@ function createApp() {
 
   swaggerTools.initializeMiddleware(apiJson, (swaggerMiddleware) => {
     const validatorOpt = { validateResponse: true }
+    const securityOptions = { api_key: handleApiKey }
 
     app.use(swaggerMiddleware.swaggerMetadata())
 
-    app.use(swaggerMiddleware.swaggerSecurity())
+    app.use(swaggerMiddleware.swaggerSecurity(securityOptions))
 
     app.use(swaggerMiddleware.swaggerValidator(validatorOpt))
 
