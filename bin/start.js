@@ -1,7 +1,4 @@
-#!/usr/bin/env node
-
-
-const createApp = require('../app')
+const app = require('../app')
 const debug = require('debug')('react-antd-admin-server:server')
 const http = require('http')
 const config = require('config')
@@ -23,7 +20,6 @@ function normalizePort(val) {
   return false
 }
 
-const app = createApp()
 const port = normalizePort(config.server.port || '3000')
 app.set('port', port)
 
@@ -75,7 +71,6 @@ function onListening() {
  */
 
 server.listen(port, () => {
-  debug('sadfsdfsdafsdfsdfsdfsd')
   console.log('Your server is listening on port %d (http://localhost:%d)', port, port)
   console.log('Swagger-ui is available on http://localhost:%d/docs', port)
 })

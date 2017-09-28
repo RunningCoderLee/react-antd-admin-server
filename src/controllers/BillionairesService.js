@@ -1,10 +1,10 @@
+/**
+ * list of the world's billionaires
+ * get top ten billionaires in the world
+ *
+ * returns List
+ * */
 exports.billionairesGET = function billionairesGET(args, res) {
-  /**
-   * list of the world's billionaires
-   * get top ten billionaires in the world
-   *
-   * returns List
-   * */
   const examples = {}
   examples['application/json'] = [{
     name: 'Bill Gates',

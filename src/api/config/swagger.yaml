@@ -39,6 +39,7 @@ paths:
       produces:
       - application/json
       - text/plain
+      - text/html
       operationId: postAuthentication
       parameters:
       - name: userInfo
@@ -65,14 +66,17 @@ paths:
           schema: 
             type: object
             properties:
+              id: 
+                type: string
               name: 
                 type: string
               token:
                 type: string
           examples:
             application/json:
-              name: 'mock-admin'
-              token: 'mock-token'
+              id: '10000'
+              name: 'Running Coder'
+              token: 'xxxxxxxxxx'
         400:
           description: bad request
         500:

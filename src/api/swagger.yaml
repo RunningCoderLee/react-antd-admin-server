@@ -28,6 +28,7 @@ paths:
       produces:
       - "application/json"
       - "text/plain"
+      - "text/html"
       parameters:
       - in: "body"
         name: "userInfo"
@@ -42,8 +43,9 @@ paths:
             $ref: "#/definitions/inline_response_200"
           examples:
             application/json:
-              name: "mock-admin"
-              token: "mock-token"
+              id: "10000"
+              name: "Running Coder"
+              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMDAwMCIsImV4cCI6MzAwMDAwLCJhdWQiOiJ2aXNpdG9yIiwic3ViIjoiaHR0cDovL3JlYWN0LWFudGQtYWRtaW4tc2VydmVyIiwiaXNzIjoicmVhY3QtYW50ZC1hZG1pbi1zZXJ2ZXIiLCJuYmYiOjE1MDY1MzI1MTcsImlhdCI6MTUwNjUzMjU2MCwianRpIjoiMjU2ZGY0NzMtYzBjZS00ZjhiLTk5ZTYtODA1Njk3MzJjNjYxIn0.DiRZgh70EDIZQSQbkHCrXigQW0gmNBzmY6A-uOt0jfQ"
           headers:
             api-key:
               type: "string"
@@ -139,6 +141,8 @@ definitions:
         type: "string"
   inline_response_200:
     properties:
+      id:
+        type: "string"
       name:
         type: "string"
       token:

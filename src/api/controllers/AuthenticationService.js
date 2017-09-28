@@ -10,8 +10,9 @@ exports.postAuthentication = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "name" : "mock-admin",
-  "token" : "mock-token"
+  "id" : "10000",
+  "name" : "Running Coder",
+  "token" : "xxxxxxxxxx"
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
