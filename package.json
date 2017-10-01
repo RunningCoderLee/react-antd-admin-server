@@ -1,14 +1,17 @@
 {
-  "name": "swagger_petstore",
-  "version": "1.0.0",
-  "description": "This_is_a_sample_server_Petstore_server___You_can_find_out_more_about_____Swagger_at__httpswagger_io_httpswagger_io_or_on__irc_freenode_net_swagger_httpswagger_ioirc_______For_this_sample_you_can_use_the_api_key_special_key_to_test_the_authorization_____filters_",
-  "license": "Unlicense",
+  "name": "react-antD-admin-server",
+  "version": "0.0.0",
+  "description": "This is a sample server",
+  "license": "MIT",
   "main": "src/index.js",
   "scripts": {
-    "pre-build-swagger": "rm -rf src/api/controllers src/api/swagger.yaml",
-    "generate-swagger-code": "swagger-codegen generate -l nodejs-server -c src/api/config/configuration.json -i src/api/config/swagger.yaml -o src/api",
+    "pre-build-swagger-server": "rm -rf src/api/controllers src/api/swagger.yaml",
+    "generate-swagger-code-server": "swagger-codegen generate -l nodejs-server -c src/api/config/configuration.server.json -i src/api/config/swagger.yaml -o src/api",
     "delete-useless-file": "mv src/api/api/* src/api && rm -rf src/api/README.md src/api/index.js src/api/.swagger-codegen-ignore src/api/package.json src/api/.swagger-codegen src/api/api",
-    "build-swagger": "yarn pre-build-swagger && yarn generate-swagger-code && yarn delete-useless-file",
+    "build-swagger-server": "yarn pre-build-swagger-server && yarn generate-swagger-code-server && yarn delete-useless-file",
+    "pre-build-swagger-client": "cd react-antd-admin-rest-api && for i in `ls -a | grep -v '.git$'`; do rm -rf  $i;done",
+    "generate-swagger-code-client": "swagger-codegen generate -l javascript -c src/api/config/configuration.client.json -i src/api/config/swagger.yaml -o react-antd-admin-rest-api",
+    "build-swagger-client": "yarn pre-build-swagger-client && yarn generate-swagger-code-client",
     "start": "export DEBUG=*,-swagger-tools:*,-express:* NODE_ENV=development && node ./bin/start.js",
     "test": "./node_modules/mocha/bin/mocha --recursive"
   },
@@ -19,16 +22,16 @@
     "body-parser": "1.17.1",
     "config": "1.26.2",
     "cookie-parser": "1.4.3",
-    "cors": "^2.8.4",
+    "cors": "2.8.4",
     "debug": "2.6.3",
-    "dotenv": "^4.0.0",
+    "dotenv": "4.0.0",
     "express": "4.15.2",
-    "js-yaml": "^3.10.0",
-    "jsonwebtoken": "^8.0.1",
+    "js-yaml": "3.10.0",
+    "jsonwebtoken": "8.0.1",
     "morgan": "1.8.1",
     "superagent": "3.5.2",
-    "swagger-tools": "^0.10.1",
-    "uuid": "^3.1.0"
+    "swagger-tools": "0.10.1",
+    "uuid": "3.1.0"
   },
   "devDependencies": {
     "eslint": "4.7.2",
@@ -37,6 +40,6 @@
     "expect.js": "0.3.1",
     "mocha": "2.3.4",
     "sinon": "1.17.3",
-    "supports-color": "^4.4.0"
+    "supports-color": "4.4.0"
   }
 }

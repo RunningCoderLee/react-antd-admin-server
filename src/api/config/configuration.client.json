@@ -5,10 +5,6 @@
 
   "allowUnicodeIdentifiers": false,
 
-  "sourceFolder": "src111",
-
-  "apiPackage": "ppi",
-
   "usePromises": true,
 
   "emitModelMethods": false,

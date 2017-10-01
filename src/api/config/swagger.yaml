@@ -2,7 +2,7 @@ swagger: '2.0'
 
 info:
   version: 0.0.0
-  title: React AntD Admin Rest Api
+  title: React-Antd-Admin-Rest-Api
   description: a standard restful api for project react-antd-admin
   
 host: 'localhost:30000'
