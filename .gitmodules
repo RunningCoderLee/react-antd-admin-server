@@ -1,0 +1,3 @@
+[submodule "react-antd-admin-rest-api"]
+	path = react-antd-admin-rest-api
+	url = git@github.com:RunningCoderLee/react-antd-admin-rest-api.git
